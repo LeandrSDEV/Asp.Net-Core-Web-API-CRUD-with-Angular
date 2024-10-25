@@ -1,4 +1,8 @@
 
+using Microsoft.EntityFrameworkCore;
+using PaymentAPI.Data;
+using PaymentAPI.Models;
+
 namespace PaymentAPI
 {
     public class Program
@@ -13,6 +17,8 @@ namespace PaymentAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<PaymentDbContext>(options => options.UseMySql(builder.Configuration.GetConnectionString("DevConnection"), new MySqlServerVersion(new Version(8,0,39))));
 
             var app = builder.Build();
 
